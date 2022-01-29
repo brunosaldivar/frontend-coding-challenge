@@ -1,0 +1,48 @@
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+    <!-- payrollProvider Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> PAYROLL PROVIDER </th>
+      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+    </ng-container>
+  
+    <!-- workerCount Column -->
+    <ng-container matColumnDef="workerCount">
+      <th mat-header-cell *matHeaderCellDef> WORKER </th>
+      <td mat-cell *matCellDef="let element"> {{element.workerCount}} </td>
+    </ng-container>
+  
+    <!-- complianceStats.total Column -->
+    <ng-container matColumnDef="total">
+      <th mat-header-cell *matHeaderCellDef> COMPLIANCE SCORE </th>
+      <td mat-cell *matCellDef="let element"> {{element.complianceStats !== null ? element.complianceStats.total : null}} </td>
+    </ng-container>
+  
+    <!-- grossPayTotalgrossPayTotal Column -->
+    <ng-container matColumnDef="grossPayTotal">
+      <th mat-header-cell *matHeaderCellDef>GROSS PAY (£)</th>
+      <td mat-cell *matCellDef="let element"> {{element.grossPayTotal}} </td>
+    </ng-container>
+
+    <!-- payrollAdminTotal Column -->
+    <ng-container matColumnDef="payrollAdminTotal">
+        <th mat-header-cell *matHeaderCellDef>PAYROLL ADMIN (£)</th>
+        <td mat-cell *matCellDef="let element"> {{element.payrollAdminTotal}} </td>
+     </ng-container>
+
+    <!-- labourCostTotal Column -->
+    <ng-container matColumnDef="labourCostTotal">
+        <th mat-header-cell *matHeaderCellDef>LABOUR COST (£)</th>
+        <td mat-cell *matCellDef="let element"> {{element.labourCostTotal}} </td>
+    </ng-container>
+    <!-- workForce Column -->
+    <ng-container matColumnDef="workForce">
+        <th mat-header-cell *matHeaderCellDef>WORK FORCE</th>
+        <td mat-cell *matCellDef="let element"> {{element.labourCostTotal}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  
+  
