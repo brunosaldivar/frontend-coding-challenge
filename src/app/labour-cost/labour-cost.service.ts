@@ -12,6 +12,7 @@ import { Observable,throwError } from 'rxjs'
 export class LabourCostService {
   
   providers = DATA[0].providers;
+  totals = DATA[0].total;
   constructor() { }
 
   private handleError(err:HttpErrorResponse){
@@ -19,9 +20,12 @@ export class LabourCostService {
     console.log(err.message);
     return new Error(err.message);
   }
+
+  public getTotals(): any{
+    return this.totals[0];
+  }
   public getProviders(): any{
     return this.providers;
-
   }
 }
 /*

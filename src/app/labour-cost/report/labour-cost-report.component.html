@@ -4,45 +4,53 @@
     <ng-container matColumnDef="name">
       <th mat-header-cell *matHeaderCellDef> PAYROLL PROVIDER </th>
       <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+      <td mat-footer-cell *matFooterCellDef> Total </td>
     </ng-container>
   
     <!-- workerCount Column -->
     <ng-container matColumnDef="workerCount">
       <th mat-header-cell *matHeaderCellDef> WORKER </th>
       <td mat-cell *matCellDef="let element"> {{element.workerCount}} </td>
+      <td mat-footer-cell *matFooterCellDef> {{getTotalWorkers() |  number:'1.0-0'}} </td>
     </ng-container>
   
     <!-- complianceStats.total Column -->
-    <ng-container matColumnDef="total">
+    <ng-container matColumnDef="complianceStats">
       <th mat-header-cell *matHeaderCellDef> COMPLIANCE SCORE </th>
-      <td mat-cell *matCellDef="let element"> {{element.complianceStats !== null ? element.complianceStats.total : null}} </td>
+      <td mat-cell *matCellDef="let element"> {{ (element.complianceStats !== null ? element.complianceStats.Total : 0) / 100 | percent}} </td>
+      <td mat-footer-cell *matFooterCellDef> {{getTotalScore()  | percent }} </td>
     </ng-container>
   
     <!-- grossPayTotalgrossPayTotal Column -->
     <ng-container matColumnDef="grossPayTotal">
       <th mat-header-cell *matHeaderCellDef>GROSS PAY (£)</th>
-      <td mat-cell *matCellDef="let element"> {{element.grossPayTotal}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.grossPayTotal / 100 | number:'1.0-0'}} </td>
+      <td mat-footer-cell *matFooterCellDef> {{getTotalGrossPay() / 100 |  number:'1.0-0'}} </td>
     </ng-container>
 
     <!-- payrollAdminTotal Column -->
     <ng-container matColumnDef="payrollAdminTotal">
         <th mat-header-cell *matHeaderCellDef>PAYROLL ADMIN (£)</th>
-        <td mat-cell *matCellDef="let element"> {{element.payrollAdminTotal}} </td>
+        <td mat-cell *matCellDef="let element"> {{element.payrollAdminTotal === 0 ? '-' : element.payrollAdminTotal}} </td>
+        <td mat-footer-cell *matFooterCellDef> {{getTotalPayrollAdmin()}} </td>
      </ng-container>
 
     <!-- labourCostTotal Column -->
     <ng-container matColumnDef="labourCostTotal">
         <th mat-header-cell *matHeaderCellDef>LABOUR COST (£)</th>
-        <td mat-cell *matCellDef="let element"> {{element.labourCostTotal}} </td>
+        <td mat-cell *matCellDef="let element"> {{element.labourCostTotal / 100 | number:'1.0-0'}} </td>
+        <td mat-footer-cell *matFooterCellDef> {{getTotalLabourCost() / 100 | number:'1.0-0'}} </td>
     </ng-container>
     <!-- workForce Column -->
     <ng-container matColumnDef="workForce">
         <th mat-header-cell *matHeaderCellDef>WORK FORCE</th>
-        <td mat-cell *matCellDef="let element"> {{element.labourCostTotal}} </td>
+        <td mat-cell *matCellDef="let element"> {{element.workerCount / getTotalWorkForce() | percent:'1.1-1' }} </td>
+        <td mat-footer-cell *matFooterCellDef> {{getTotalWorkForce() }} </td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
   </table>
   
   
