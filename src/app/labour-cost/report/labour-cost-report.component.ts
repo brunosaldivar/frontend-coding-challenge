@@ -39,6 +39,7 @@ export class LabourCostReportComponent implements AfterViewInit {
   directContractors : Provider;
   sortedData: Provider[];
   providers: Provider[];
+  sortColumn : String = "";
   ngAfterViewInit() {
    // this.dataSource.sort = this.sort;
   }
@@ -47,6 +48,7 @@ export class LabourCostReportComponent implements AfterViewInit {
       //this._service.getProviders().subscribe((providers)=> {
       //      this.dataSource = new MatTableDataSource(providers)
       //   });
+      this.sortColumn = ""
       this.providers = this._service.getProviders();
       this.directContractors = this._service.getDirectContractors();
       this.totals = this._service.getTotals();
@@ -56,11 +58,13 @@ export class LabourCostReportComponent implements AfterViewInit {
       this.sortedData = this.providers.slice();
   }
   sortProviders(sort: Sort) {
+    
     const data = this.providers.slice();
     if (!sort.active || sort.direction === '') {
        this.sortedData = data;
        return;
     }
+    this.sortColumn = sort.active;
     this.sortedData = data.sort((a, b) => {
        const isAsc = sort.direction === 'asc';
        switch (sort.active) {
@@ -70,13 +74,25 @@ export class LabourCostReportComponent implements AfterViewInit {
           case 'grossPayTotal': return compare(a.grossPayTotal, b.grossPayTotal, isAsc);
           case 'payrollAdminTotal': return compare(a.payrollAdminTotal, b.payrollAdminTotal, isAsc);
           case 'labourCostTotal': return compare(a.labourCostTotal, b.labourCostTotal, isAsc);
-          case 'workForce': return compare(a.workerCount, b.payrollAdminTotal, isAsc);
+          case 'workForce': return compare(a.workerCount, b.workerCount, isAsc);
 
           default: return 0;
-       } 
-    });
+       }});
+    if(sort.active === 'name'){
+      this.reorderDirectContract(true)
+    }
   }
-  
+  reorderDirectContract (setFirst: boolean = false){
+    let old_index : number = 0
+    if(setFirst){
+      for ( let i = 0; i < this.sortedData.length; i++){
+        if(this.sortedData[i].providerId === 0){
+          old_index = i;
+        }
+      }
+      this.sortedData.splice(0,0,this.sortedData[old_index])
+    }
+  }
  
   ngOnInit(): void {
     //let providers  = this.service.getProviders()

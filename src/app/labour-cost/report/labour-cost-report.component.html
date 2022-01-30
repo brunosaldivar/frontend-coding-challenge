@@ -11,20 +11,20 @@
     </tr>
   
     <tr *ngFor="let provider of sortedData">
-      <td>{{provider.name}}</td>
-      <td>{{provider.workerCount}}</td>
-      <td>{{(provider.complianceStats !== null ? provider.complianceStats.Total : 0) / 100 | percent }}</td>
-      <td>{{provider.grossPayTotal / 100 | number:'1.0-0'}}</td>
-      <td>{{provider.payrollAdminTotal === 0 ? '-' : provider.payrollAdminTotal}}</td>
-      <td>{{provider.labourCostTotal / 100 | number:'1.0-0'}}</td>
-      <td>{{provider.workerCount / getTotalWorkForce() | percent:'1.1-1'}}</td>
+      <td [ngStyle]="{'font-weight': this.sortColumn === 'name' ? 'bold' : ''}" >{{provider.name}}</td>
+      <td [ngStyle]="{'font-weight': this.sortColumn === 'workerCount' ? 'bold' : ''}">{{provider.workerCount}}</td>
+      <td [ngStyle]="{'font-weight': this.sortColumn === 'complianceStats' ? 'bold' : ''}">{{(provider.complianceStats !== null ? provider.complianceStats.Total : 0) / 100 | percent }}</td>
+      <td [ngStyle]="{'font-weight': this.sortColumn === 'grossPayTotal' ? 'bold' : ''}">{{provider.grossPayTotal / 100 | number:'1.0-0'}}</td>
+      <td [ngStyle]="{'font-weight': this.sortColumn === 'payrollAdminTotal' ? 'bold' : ''}">{{provider.payrollAdminTotal === 0 ? '-' : provider.payrollAdminTotal}}</td>
+      <td [ngStyle]="{'font-weight': this.sortColumn === 'labourCostTotal' ? 'bold' : ''}" >{{provider.labourCostTotal / 100 | number:'1.0-0'}}</td>
+      <td [ngStyle]="{'font-weight': this.sortColumn === 'workForce' ? 'bold' : ''}">{{provider.workerCount / getTotalWorkForce() | percent:'1.1-1'}}</td>
     </tr>
 
     <tr>
         <td> TOTAL </td>
-        <td> {{getTotalWorkers() |  number:'1.0-0'}} </td>
-        <td> {{getTotalScore()  | percent }} </td>
-        <td> {{getTotalGrossPay()  |  number:'1.0-0'}} </td>
+        <td> {{getTotalWorkers() | number:'1.0-0'}} </td>
+        <td> {{getTotalScore() | percent }} </td>
+        <td> {{getTotalGrossPay() | number:'1.0-0'}} </td>
         <td> {{getTotalPayrollAdmin()}} </td>
         <td> {{getTotalLabourCost() / 100 | number:'1.0-0'}} </td>
         <td> {{getTotalWorkForce() / getTotalWorkForce() | percent:'1.1-1'}} </td>
