@@ -1,0 +1,55 @@
+<table mat-table [dataSource]="dataSource" matSort (matSortChange)="sortProviders($event)" class="mat-elevation-z8">
+
+    <!-- payrollProvider Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header > PAYROLL PROVIDER </th>
+      <td mat-cell *matCellDef="let element of sortedData"> {{element.name}} </td>
+      <td mat-footer-cell *matFooterCellDef> TOTAL </td>
+    </ng-container>
+  
+    <!-- workerCount Column -->
+    <ng-container matColumnDef="workerCount">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> WORKER </th>
+      <td mat-cell *matCellDef="let element of sortedData"> {{element.workerCount}} </td>
+      <td mat-footer-cell *matFooterCellDef> {{getTotalWorkers() |  number:'1.0-0'}} </td>
+    </ng-container>
+  
+    <!-- complianceStats.total Column -->
+    <ng-container matColumnDef="complianceStats">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> COMPLIANCE SCORE </th>
+      <td mat-cell *matCellDef="let element of sortedData"> {{ (element.complianceStats !== null ? element.complianceStats.Total : 0) / 100 | percent}} </td>
+      <td mat-footer-cell *matFooterCellDef> {{getTotalScore()  | percent }} </td>
+    </ng-container>
+  
+    <!-- grossPayTotalgrossPayTotal Column -->
+    <ng-container matColumnDef="grossPayTotal">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>GROSS PAY (£)</th>
+      <td mat-cell *matCellDef="let element of sortedData"> {{element.grossPayTotal / 100 | number:'1.0-0'}} </td>
+      <td mat-footer-cell *matFooterCellDef> {{getTotalGrossPay()  |  number:'1.0-0'}} </td>
+    </ng-container>
+
+    <!-- payrollAdminTotal Column -->
+    <ng-container matColumnDef="payrollAdminTotal">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>PAYROLL ADMIN (£)</th>
+        <td mat-cell *matCellDef="let element of sortedData"> {{element.payrollAdminTotal === 0 ? '-' : element.payrollAdminTotal}} </td>
+        <td mat-footer-cell *matFooterCellDef> {{getTotalPayrollAdmin()}} </td>
+     </ng-container>
+
+    <!-- labourCostTotal Column -->
+    <ng-container matColumnDef="labourCostTotal">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>LABOUR COST (£)</th>
+        <td mat-cell *matCellDef="let element of sortedData"> {{element.labourCostTotal / 100 | number:'1.0-0'}} </td>
+        <td mat-footer-cell *matFooterCellDef> {{getTotalLabourCost() / 100 | number:'1.0-0'}} </td>
+    </ng-container>
+    <!-- workForce Column -->
+    <ng-container matColumnDef="workForce">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>WORK FORCE</th>
+        <td mat-cell *matCellDef="let element of sortedData"> {{element.workerCount / getTotalWorkForce() | percent:'1.1-1' }} </td>
+        <td mat-footer-cell *matFooterCellDef> {{getTotalWorkForce() / getTotalWorkForce() | percent:'1.1-1'}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
+  </table>
+  
