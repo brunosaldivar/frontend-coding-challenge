@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MatTableModule } from '@angular/material/table';
+import { MatSortModule } from '@angular/material/sort';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { LabourCostReportComponent } from './labour-cost/report/labour-cost-report.component';
 
@@ -15,7 +16,8 @@ import { LabourCostReportComponent } from './labour-cost/report/labour-cost-repo
     BrowserModule,
     AppRoutingModule,
     NoopAnimationsModule,
-    MatTableModule 
+    MatTableModule,
+    MatSortModule
   ],
   providers: [],
   bootstrap: [AppComponent]

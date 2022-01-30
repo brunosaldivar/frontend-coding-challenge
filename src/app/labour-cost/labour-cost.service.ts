@@ -13,6 +13,8 @@ export class LabourCostService {
   
   providers = DATA[0].providers;
   totals = DATA[0].total;
+  directContractors = DATA[0].directContractors;
+
   constructor() { }
 
   private handleError(err:HttpErrorResponse){
@@ -26,6 +28,9 @@ export class LabourCostService {
   }
   public getProviders(): any{
     return this.providers;
+  }
+  public getDirectContractors(): any{
+    return this.directContractors[0];
   }
 }
 /*

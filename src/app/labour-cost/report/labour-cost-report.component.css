@@ -2,6 +2,16 @@ table {
     width: 100%;
     font-family: 'Open Sans', sans-serif;
   }
+  .mat-row .mat-cell {
+    border-bottom: 1px solid transparent;
+    border-top: 1px solid transparent;
+  }
+  th.mat-header-cell {
+    word-spacing: 100vw;
+    padding: 0;
+    border-bottom-width: 0;
+    border-bottom-style: none;
+  }
   tr.mat-footer-row {
     font-weight: bold;
   }
