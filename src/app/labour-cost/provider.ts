@@ -19,7 +19,12 @@ export interface ComplianceStat {
     providerId: number;
     name :string;
   }
-  export interface DataProviders {
+  export interface ResponseDataProviders {
+    providers: Provider[],
+    total : Provider[],
+    directContractors  : Provider[]
+  } 
+   export interface DataProviders {
     providers: Provider[],
     totals : Provider,
     directContractor  : Provider

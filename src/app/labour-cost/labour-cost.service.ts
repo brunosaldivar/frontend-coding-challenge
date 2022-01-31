@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { DATA } from './mock.data'
-import { Provider, DataProviders } from './provider'
+import { Provider, ResponseDataProviders } from './provider'
 
 import { HttpClient, HttpHeaders, HttpClientModule } from '@angular/common/http';
 import { HttpErrorResponse, HttpParams } from '@angular/common/http';
-import { Observable,throwError } from 'rxjs'
-
+import { catchError, map, Observable,of,throwError } from 'rxjs'
+import { environment } from '../../environments/environment.dev';
 
 @Injectable({
   providedIn: 'root'
@@ -16,21 +16,32 @@ export class LabourCostService {
   totals: Provider | undefined;
   directContractors : Provider | undefined
 
-  constructor() { }
+  constructor(private http: HttpClient) {
+    
+  }
 
   private handleError(err:HttpErrorResponse){
     console.log('Handle http error');
     console.log(err.message);
     return new Error(err.message);
   }
-  public getData() : DataProviders{
+  public getData() : Observable<ResponseDataProviders>{
 
-    return {
-      providers : DATA[0].providers,
-      totals : DATA[0].total[0],
-      directContractor : DATA[0].directContractors[0]
+    let url = environment.apiEndpoint;
+
+    if(environment.fakeData){
+      return of(
+        { 
+          providers: DATA[0].providers,
+          total : DATA[0].total,
+          directContractors : DATA[0].directContractors
+      })
+    }else{
+      return this.http.get<Array<ResponseDataProviders>>(url).pipe(
+        map((data) => data[0])
+      );
+
     }
-
   }
   public getTotals(): Provider | undefined{
     return this.totals;

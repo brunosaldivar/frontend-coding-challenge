@@ -1,10 +1,8 @@
-import {LiveAnnouncer} from '@angular/cdk/a11y';
 import {OnInit, Component } from '@angular/core';
 import { Sort} from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { provideRoutes } from '@angular/router';
 import { LabourCostService } from '../labour-cost.service';
-import { Provider, DataProviders } from '../provider';
+import { DataProviders, Provider, ResponseDataProviders } from '../provider';
 
 
 @Component({
@@ -19,7 +17,6 @@ export class LabourCostReportComponent implements OnInit {
   data!: DataProviders;
   sortedData!: Provider[];
   sortColumn : String;
-
   constructor( private service: LabourCostService) { 
       //set columns to display
       this.displayedColumns = ['name', 'workerCount', 'complianceStats', 'grossPayTotal', 'payrollAdminTotal','labourCostTotal','workForce'];
@@ -27,21 +24,25 @@ export class LabourCostReportComponent implements OnInit {
       //      this.dataSource = new MatTableDataSource(providers)
       //   });
       this.sortColumn = ""
-     /* this.providers = this._service.getProviders();
-      this.directContractors = this._service.getDirectContractors();
-      this.totals = this._service.getTotals();
-      this.providers.push(this.directContractors)
-    */
   }
   
   getData(): void{
-    this.data = this.service.getData();
+    this.service.getData().subscribe((data: ResponseDataProviders) => {
+      this.data = this.toSingleObject(data);
+      this.dataSource = new MatTableDataSource(this.data.providers);
+      this.sortedData = this.data.providers.slice();
+    });
   }
- 
+  toSingleObject(data : ResponseDataProviders): DataProviders{
+    return {
+      providers : data.providers,
+      totals : data.total[0],
+      directContractor : data.directContractors[0]
+    }
+  }
   ngOnInit(): void {
     this.getData();    
-    this.dataSource = new MatTableDataSource(this.data.providers)
-    this.sortedData = this.data.providers.slice();
+    
   }
 
   //// GET TOTALS///

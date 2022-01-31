@@ -1,7 +1,7 @@
   
-  <table @rowsAnimation matSort (matSortChange)="sortProviders($event)" matSortActive="name" matSortDirection="asc">
+  <table *ngIf="data" matSort (matSortChange)="sortProviders($event)" matSortActive="name" matSortDirection="asc">
     <tr class="header">
-      <th mat-sort-header="name"  >PAYROLL PROVIDER</th>
+      <th mat-sort-header="name">PAYROLL PROVIDER</th>
       <th mat-sort-header="workerCount">WORKER</th>
       <th mat-sort-header="complianceStats">COMPLIANCE SCORE</th>
       <th mat-sort-header="grossPayTotal">GROSS PAY (£)</th>

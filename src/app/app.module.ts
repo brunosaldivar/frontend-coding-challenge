@@ -6,6 +6,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { LabourCostReportComponent } from './labour-cost/report/labour-cost-report.component';
+import { HttpClientModule } from '@angular/common/http'
 
 @NgModule({
   declarations: [
@@ -17,8 +18,8 @@ import { LabourCostReportComponent } from './labour-cost/report/labour-cost-repo
     AppRoutingModule,
     NoopAnimationsModule,
     MatTableModule,
-    MatSortModule
-    
+    MatSortModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
