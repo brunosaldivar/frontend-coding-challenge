@@ -54,7 +54,7 @@ $challenge-app-theme: mat.define-light-theme((
         position: absolute;
         color:  rgb(102, 1, 1) !important;
         opacity: 1 !important;
-        font-size: 1em;
+        font-size: 9px;
         font-weight: bold;
         transform: translate(0,0) rotate(90deg) !important;
       }
@@ -71,7 +71,7 @@ $challenge-app-theme: mat.define-light-theme((
         position: absolute;
         color:  rgb(102, 1, 1) !important;
         opacity: 1 !important;
-        font-size: 1em;
+        font-size: 9px;
         font-weight: bold;
         transform: translate(0,-10%) rotate(90deg) !important;
       }

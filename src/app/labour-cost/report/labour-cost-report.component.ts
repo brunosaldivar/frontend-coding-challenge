@@ -1,9 +1,8 @@
 import {OnInit, Component } from '@angular/core';
-import { Sort} from '@angular/material/sort';
+import { Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { LabourCostService } from '../labour-cost.service';
 import { DataProviders, Provider, ResponseDataProviders } from '../provider';
-
 
 @Component({
   selector: 'app-labour-cost-report',
@@ -18,7 +17,8 @@ export class LabourCostReportComponent implements OnInit {
   sortedData!: Provider[];
   sortColumn : String;
   title: String;
-  
+  sortDefault! : Sort;
+
   constructor( private service: LabourCostService) { 
       //set columns to display
       this.displayedColumns = ['name', 'workerCount', 'complianceStats', 'grossPayTotal', 'payrollAdminTotal','labourCostTotal','workForce'];
@@ -31,11 +31,18 @@ export class LabourCostReportComponent implements OnInit {
       this.data = this.toSingleObject(data);
       //push DC
       this.data.providers.push(this.data.directContractor)
-      //
       this.dataSource = new MatTableDataSource(this.data.providers);
       this.sortedData = this.data.providers.slice();
+
+      //sort default
+      this.sortDefault  = {
+        direction : 'asc',
+        active :  "name"
+      }
+      this.sortProviders(this.sortDefault)
     });
   }
+  //transform response to object 
   toSingleObject(data : ResponseDataProviders): DataProviders{
     return {
       providers : data.providers,
