@@ -17,11 +17,13 @@ export class LabourCostReportComponent implements OnInit {
   data!: DataProviders;
   sortedData!: Provider[];
   sortColumn : String;
-
+  title: String;
+  
   constructor( private service: LabourCostService) { 
       //set columns to display
       this.displayedColumns = ['name', 'workerCount', 'complianceStats', 'grossPayTotal', 'payrollAdminTotal','labourCostTotal','workForce'];
       this.sortColumn = ""
+      this.title = 'Labour cost report';
   }
   
   getData(): void{

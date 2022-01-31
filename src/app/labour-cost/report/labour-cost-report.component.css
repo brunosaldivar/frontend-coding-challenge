@@ -26,7 +26,25 @@ text-align: right;
 text-align: right;
 font-weight: bold;
 }
-
-.border{
-border-right: 1px solid #e7e7e7;
+.footer td:last-child{
+  text-align: right;
+  font-weight: bold;
+  }
+  
+.celldata td:nth-child(3n){
+  border-right: 1px solid #e7e7e7;
+}
+.footer td:nth-child(3n){
+  border-right: 1px solid #e7e7e7;
+}
+.container{
+  padding: 2%;
+}
+h1 {
+  padding-left: 10px;
+  font-weight: normal;
+  font-family: 'Open Sans', sans-serif;
+}
+.middle {
+  height: 5px;
 }

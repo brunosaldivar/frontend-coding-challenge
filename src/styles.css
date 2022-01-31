@@ -4,13 +4,8 @@
 html, body { height: 100%; }
 body { margin: 0; font-family: 'Open Sans', sans-serif; }
 
-.mat-sort-header-content {
-    text-align: left !important;
-  }
 
-  .mat-sort-header-container:nth-child(2){
-    text-align: right !important;
-  }
   
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+

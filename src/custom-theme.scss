@@ -33,3 +33,61 @@ $challenge-app-theme: mat.define-light-theme((
 // that you are using.
 @include mat.all-component-themes($challenge-app-theme);
 
+/* Hide the default sort arrow display: */
+.mat-sort-header-stem {
+  display: none  !important;
+}
+.mat-sort-header-pointer-left, .mat-sort-header-pointer-right {
+  display: none  !important;
+}
+.mat-sort-header-pointer-middle{
+  width: 0px !important;
+  height: 0px !important;
+}
+
+/* show ascending caret when sorted ascending:*/
+[aria-sort="ascending"] {
+.mat-sort-header-arrow {
+    .mat-sort-header-indicator {
+      &::before {
+        content: "<"; 
+        position: absolute;
+        color:  rgb(102, 1, 1) !important;
+        opacity: 1 !important;
+        font-size: 1em;
+        font-weight: bold;
+        transform: translate(0,0) rotate(90deg) !important;
+      }
+    }
+  }
+}
+
+/* show descending caret when sorted descending: */
+[aria-sort="descending"] {
+.mat-sort-header-arrow {
+    .mat-sort-header-indicator {
+      &::before {
+        content: ">";
+        position: absolute;
+        color:  rgb(102, 1, 1) !important;
+        opacity: 1 !important;
+        font-size: 1em;
+        font-weight: bold;
+        transform: translate(0,-10%) rotate(90deg) !important;
+      }
+    }
+  }
+}
+
+th td:nth-child(1n+4){
+  text-align: right;
+}
+tr th:nth-child(1n+4){
+  div{
+    
+    text-align: right;
+    padding-left: 15%;
+  }
+ 
+  // 
+}
