@@ -17,18 +17,19 @@ export class LabourCostReportComponent implements OnInit {
   data!: DataProviders;
   sortedData!: Provider[];
   sortColumn : String;
+
   constructor( private service: LabourCostService) { 
       //set columns to display
       this.displayedColumns = ['name', 'workerCount', 'complianceStats', 'grossPayTotal', 'payrollAdminTotal','labourCostTotal','workForce'];
-      //this._service.getProviders().subscribe((providers)=> {
-      //      this.dataSource = new MatTableDataSource(providers)
-      //   });
       this.sortColumn = ""
   }
   
   getData(): void{
     this.service.getData().subscribe((data: ResponseDataProviders) => {
       this.data = this.toSingleObject(data);
+      //push DC
+      this.data.providers.push(this.data.directContractor)
+      //
       this.dataSource = new MatTableDataSource(this.data.providers);
       this.sortedData = this.data.providers.slice();
     });
@@ -42,9 +43,7 @@ export class LabourCostReportComponent implements OnInit {
   }
   ngOnInit(): void {
     this.getData();    
-    
   }
-
   //// GET TOTALS///
   getTotalWorkers(): number {
     return this.data.totals.workerCount;
@@ -96,14 +95,15 @@ export class LabourCostReportComponent implements OnInit {
   }
   reorderDirectContract (setFirst: boolean = false){
     let old_index : number = 0
+
     if(setFirst){
       for ( let i = 0; i < this.sortedData.length; i++){
         if(this.sortedData[i].providerId === 0){
           old_index = i;
-          break;
         }
       }
-      this.sortedData.splice(0,0,this.sortedData[old_index])
+      let elem = this.sortedData.splice(old_index,1)
+      this.sortedData.unshift(this.data.directContractor)
     }
   }
 }
