@@ -1,30 +1,9 @@
 import {LiveAnnouncer} from '@angular/cdk/a11y';
-import {AfterViewInit, Component, ViewChild} from '@angular/core';
-import {MatSort, Sort} from '@angular/material/sort';
+import {AfterViewInit, Component } from '@angular/core';
+import { Sort} from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { LabourCostService } from '../labour-cost.service';
-
-export interface ComplianceStat {
-  OpsEmpStatusChecked : number;
-  Total: number;
-  TaxStatus: number;
-  Identification: number;
-  RightToWork: number;
-  OpsChecked: number;
-  Contract: number;
-  EmpStatusReview: number;
-}
-export interface Provider {
-  rebatesTotal: number;
-  grossPayTotal: number;
-  workerCount: number;
-  complianceStats: ComplianceStat | null;
-  payrollAdminTotal : number;
-  labourCostTotal: number;
-  providerId: number;
-  name :string;
-  totalWorkers : number;
-}
+import { Provider } from '../provider';
 
 @Component({
   selector: 'app-labour-cost-report',
@@ -43,7 +22,7 @@ export class LabourCostReportComponent implements AfterViewInit {
   ngAfterViewInit() {
    // this.dataSource.sort = this.sort;
   }
-  constructor( private _service: LabourCostService, private _liveAnnouncer: LiveAnnouncer) { 
+  constructor( private _service: LabourCostService) { 
 
       //this._service.getProviders().subscribe((providers)=> {
       //      this.dataSource = new MatTableDataSource(providers)
@@ -88,6 +67,7 @@ export class LabourCostReportComponent implements AfterViewInit {
       for ( let i = 0; i < this.sortedData.length; i++){
         if(this.sortedData[i].providerId === 0){
           old_index = i;
+          break;
         }
       }
       this.sortedData.splice(0,0,this.sortedData[old_index])
@@ -118,6 +98,10 @@ export class LabourCostReportComponent implements AfterViewInit {
   }
   getTotalWorkForce(): number {
     return this.totals.workerCount;
+  }
+  //////
+  boldColumn(column: string) : any {
+    return this.sortColumn === column ? {'font-weight':'bold'} : {'font-weight':''};
   }
 
 }

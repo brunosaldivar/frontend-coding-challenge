@@ -1,26 +1,27 @@
-  <table matSort (matSortChange)="sortProviders($event)" matSortActive="name" matSortDirection="asc">
-    <tr>
-      <th mat-sort-header="name">PAYROLL PROVIDER</th>
+  
+  <table @rowsAnimation matSort (matSortChange)="sortProviders($event)" matSortActive="name" matSortDirection="asc">
+    <tr class="header">
+      <th mat-sort-header="name"  >PAYROLL PROVIDER</th>
       <th mat-sort-header="workerCount">WORKER</th>
       <th mat-sort-header="complianceStats">COMPLIANCE SCORE</th>
       <th mat-sort-header="grossPayTotal">GROSS PAY (£)</th>
-      <th mat-sort-header="payrollAdminTotal">PAYROLL ADMIN (£)</th>
+      <th mat-sort-header="payrollAdminTotal" style ="text-align: right;">PAYROLL ADMIN (£)</th>
       <th mat-sort-header="labourCostTotal">LABOUR COST (£)</th>
       <th mat-sort-header="workForce">WORK FORCE</th>
       
     </tr>
   
-    <tr *ngFor="let provider of sortedData">
-      <td [ngStyle]="{'font-weight': this.sortColumn === 'name' ? 'bold' : ''}" >{{provider.name}}</td>
-      <td [ngStyle]="{'font-weight': this.sortColumn === 'workerCount' ? 'bold' : ''}">{{provider.workerCount}}</td>
-      <td [ngStyle]="{'font-weight': this.sortColumn === 'complianceStats' ? 'bold' : ''}">{{(provider.complianceStats !== null ? provider.complianceStats.Total : 0) / 100 | percent }}</td>
-      <td [ngStyle]="{'font-weight': this.sortColumn === 'grossPayTotal' ? 'bold' : ''}">{{provider.grossPayTotal / 100 | number:'1.0-0'}}</td>
-      <td [ngStyle]="{'font-weight': this.sortColumn === 'payrollAdminTotal' ? 'bold' : ''}">{{provider.payrollAdminTotal === 0 ? '-' : provider.payrollAdminTotal}}</td>
-      <td [ngStyle]="{'font-weight': this.sortColumn === 'labourCostTotal' ? 'bold' : ''}" >{{provider.labourCostTotal / 100 | number:'1.0-0'}}</td>
-      <td [ngStyle]="{'font-weight': this.sortColumn === 'workForce' ? 'bold' : ''}">{{provider.workerCount / getTotalWorkForce() | percent:'1.1-1'}}</td>
+    <tr *ngFor="let provider of sortedData" >
+      <td [ngStyle]="boldColumn('name')"  >{{provider.name}}</td>
+      <td [ngStyle]="boldColumn('workerCount')"  >{{provider.workerCount}}</td>
+      <td class="border" [ngStyle]="boldColumn('complianceStats')" >{{(provider.complianceStats !== null ? provider.complianceStats.Total : 0) / 100 | percent }}</td>
+      <td [ngStyle]="boldColumn('grossPayTotal')" >{{provider.grossPayTotal / 100 | number:'1.0-0'}}</td>
+      <td [ngStyle]="boldColumn('payrollAdminTotal')">{{provider.payrollAdminTotal === 0 ? '-' : provider.payrollAdminTotal}}</td>
+      <td class="border" [ngStyle]="boldColumn('labourCostTotal')"  >{{provider.labourCostTotal / 100 | number:'1.0-0'}}</td>
+      <td [ngStyle]="boldColumn('workForce')" >{{provider.workerCount / getTotalWorkForce() | percent:'1.1-1'}}</td>
     </tr>
 
-    <tr>
+    <tr class="footer">
         <td> TOTAL </td>
         <td> {{getTotalWorkers() | number:'1.0-0'}} </td>
         <td> {{getTotalScore() | percent }} </td>

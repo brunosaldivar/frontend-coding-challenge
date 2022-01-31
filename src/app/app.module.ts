@@ -18,6 +18,7 @@ import { LabourCostReportComponent } from './labour-cost/report/labour-cost-repo
     NoopAnimationsModule,
     MatTableModule,
     MatSortModule
+    
   ],
   providers: [],
   bootstrap: [AppComponent]
