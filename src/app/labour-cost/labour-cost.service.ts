@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { DATA } from './mock.data'
+import { Provider, DataProviders } from './provider'
 
 import { HttpClient, HttpHeaders, HttpClientModule } from '@angular/common/http';
 import { HttpErrorResponse, HttpParams } from '@angular/common/http';
@@ -11,9 +12,9 @@ import { Observable,throwError } from 'rxjs'
 })
 export class LabourCostService {
   
-  providers = DATA[0].providers;
-  totals = DATA[0].total;
-  directContractors = DATA[0].directContractors;
+  providers : Provider[] | undefined
+  totals: Provider | undefined;
+  directContractors : Provider | undefined
 
   constructor() { }
 
@@ -22,15 +23,23 @@ export class LabourCostService {
     console.log(err.message);
     return new Error(err.message);
   }
+  public getData() : DataProviders{
 
-  public getTotals(): any{
-    return this.totals[0];
+    return {
+      providers : DATA[0].providers,
+      totals : DATA[0].total[0],
+      directContractor : DATA[0].directContractors[0]
+    }
+
   }
-  public getProviders(): any{
+  public getTotals(): Provider | undefined{
+    return this.totals;
+  }
+  public getProviders(): Provider[] | undefined{
     return this.providers;
   }
-  public getDirectContractors(): any{
-    return this.directContractors[0];
+  public getDirectContractors(): Provider | undefined{
+    return this.directContractors;
   }
 }
 /*

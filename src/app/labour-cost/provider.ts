@@ -18,6 +18,9 @@ export interface ComplianceStat {
     labourCostTotal: number;
     providerId: number;
     name :string;
-    totalWorkers : number;
   }
-  
+  export interface DataProviders {
+    providers: Provider[],
+    totals : Provider,
+    directContractor  : Provider
+  }
