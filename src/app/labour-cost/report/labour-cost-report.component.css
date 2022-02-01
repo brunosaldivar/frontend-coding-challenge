@@ -9,7 +9,6 @@
   font-weight: bold;
 }
 .footer td:last-child{
-  text-align: right;
   font-weight: bold;
 }
 .footer td:nth-child(3n){
@@ -44,4 +43,8 @@ font-size: 24px;
 }
 tr td:nth-child(1n+4){
   text-align: right;
+}
+tr td:last-child{
+  padding-left: 2em;
+  text-align: left;
 }

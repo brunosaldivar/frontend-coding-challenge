@@ -13,8 +13,8 @@
     </tr>
   
     <tr class="celldata" *ngFor="let provider of sortedData" >
-      <td [ngStyle]="boldColumn('name')"  >{{provider.name}}</td>
-      <td [ngStyle]="boldColumn('workerCount')"  >{{provider.workerCount}}</td>
+      <td [ngStyle]="boldColumn('name')">{{provider.name}}</td>
+      <td [ngStyle]="boldColumn('workerCount')">{{provider.workerCount}}</td>
       <td [ngStyle]="boldColumn('complianceStats')" >{{(provider.complianceStats !== null ? provider.complianceStats.Total : 0) / 100 | percent }}</td>
       <td [ngStyle]="boldColumn('grossPayTotal')" >{{provider.grossPayTotal / 100 | number:'1.0-0'}}</td>
       <td [ngStyle]="boldColumn('payrollAdminTotal')">{{provider.payrollAdminTotal === 0 ? '-' : provider.payrollAdminTotal}}</td>
@@ -28,7 +28,7 @@
         <td> TOTAL </td>
         <td> {{getTotalWorkers() | number:'1.0-0'}} </td>
         <td> {{getTotalScore() | percent }} </td>
-        <td> {{getTotalGrossPay() | number:'1.0-0'}} </td>
+        <td> {{getTotalGrossPay() / 100 | number:'1.0-0'}} </td>
         <td> {{getTotalPayrollAdmin()}} </td>
         <td> {{getTotalLabourCost() / 100 | number:'1.0-0'}} </td>
         <td> {{getTotalWorkForce() / getTotalWorkForce() | percent:'1.1-1'}} </td>
